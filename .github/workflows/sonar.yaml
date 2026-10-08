@@ -1,0 +1,25 @@
+name: SonarQube Custom Script
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  sonar-scan:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # Se il tuo script è un file batch o PowerShell su Windows
+      - name: Run local Sonar script
+        run: c:\Users\ademeo\Downloads\sonar-single.sh
+        shell: bash
+        env:
+          SONAR_TOKEN: squ_72cc5a08198ea4340f994d54d9b64d6025dbe13d
+          SONAR_HOST_URL: http://192.168.254.39:9000/
