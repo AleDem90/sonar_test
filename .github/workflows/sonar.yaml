@@ -1,0 +1,23 @@
+name: SonarQube Scan
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  sonar:
+    runs-on: self-hosted # Usa il runner installato nella tua VM Linux
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run SonarQube Script
+        run: ~/sonarqube-stack/sonar_runner.sh "${{ github.workspace }}"
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
