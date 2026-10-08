@@ -17,7 +17,7 @@ jobs:
           fetch-depth: 0
 
       - name: Run SonarQube Script
-        run: ~/sonarqube-stack/sonar_runner.sh "${{ github.workspace }}"
+        run: ~/sonarqube-stack/scripts/sonar_runner.sh "${{ github.workspace }}"
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
